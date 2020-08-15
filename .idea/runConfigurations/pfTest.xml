@@ -6,8 +6,8 @@
     <PathMappingSettings>
       <option name="pathMappings">
         <list>
-          <mapping local-root="$PROJECT_DIR$/main.py" remote-root="//vboxsvr/proyecto_final/pythonproject/main.py" />
-          <mapping local-root="$PROJECT_DIR$/main.py" remote-root="Z:/pythonproject/main.py" />
+          <mapping local-root="$PROJECT_DIR$/app.py" remote-root="Z:/ems-api/app.py" />
+          <mapping local-root="$PROJECT_DIR$/resources/powerfactory.py" remote-root="Z:/ems-api/resources/powerfactory.py" />
         </list>
       </option>
     </PathMappingSettings>

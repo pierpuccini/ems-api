@@ -2,27 +2,24 @@ import sys
 from flask import Response, request, jsonify
 from flask_restful import Resource
 
-sys.path.append("C:\\Program Files\\JetBrains\\PyCharm 2020.2\\debug-eggs\\pydevd-pycharm.egg")
+from json import dumps
+
 sys.path.append("C:\\Program Files (x86)\\DIgSILENT\\PowerFactory 15.1\\python")
 
-import pydevd_pycharm
 # connect to PowerFactory
 import powerfactory as pf
-
-pydevd_pycharm.settrace('192.168.0.92', port=21000, stdoutToServer=True, stderrToServer=True)
 
 
 class TensionApi(Resource):
     def get(self):
-        pf_app = pf.GetApplicationExt()
-        pf_app.show()
+        pf_app = pf.GetApplication()
         if pf_app is None:
             # raise Exception("getting PowerFactory application failed")
             return Response("getting PowerFactory application failed", mimetype="application/json", status=401)
         # print to PowerFactory output window
         pf_app.PrintInfo("Python Script started..")
 
-        user = app.GetCurrentUser()
+        user = pf_app.GetCurrentUser()
         prj = user.GetContents('*.IntPrj')[0]
 
         # get active project
@@ -31,7 +28,7 @@ class TensionApi(Resource):
             # raise Exception("No project activated. Python Script stopped.")
             return Response("No project activated. Python Script stopped.", mimetype="application/json", status=401)
 
-        prj.Activate()
+        prj[0].Activate()
         # retrieve load-flow object
         ldf = pf_app.GetFromStudyCase("ComLdf")
 
@@ -52,12 +49,18 @@ class TensionApi(Resource):
         formatted_voltage = []
         for terminal in terminals:
             voltage = terminal.GetAttribute("m:u")
-            print("Voltage at terminal %s is %f p.u." % (terminal, voltage))
-            formatted_voltage.append("Voltage at terminal %s is %f p.u." % (terminal, voltage))
+
+            print("Voltage at terminal %s is %f p.u." % (terminal.GetNodeName(), voltage))
+            print("Voltage at terminal %s is %f p.u." % (terminal.cDisplayName, voltage))
+
+            voltage_string = "Voltage at terminal " + terminal.cDisplayName + " is " + str(voltage) + " p.u."
+
+            formatted_voltage.append(voltage_string)
 
         # print to PowerFactory output window
         print("Python Script ended.")
-        return Response(formatted_voltage, mimetype="application/json", status=200)
+
+        return Response(dumps(formatted_voltage), mimetype="application/json", status=200)
     # def get(self):
     #   movies = Movie.objects().to_json()
     #   return Response(movies, mimetype="application/json", status=200)
