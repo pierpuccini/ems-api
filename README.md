@@ -4,7 +4,11 @@ description: How to install Ems-api and Ems-ui onto your windows machine
 
 # Installation & Usage
 
-## Pre requisites & Installation 
+## View Properly at
+
+[https://pierpuccini.gitbook.io/ems-api/](https://pierpuccini.gitbook.io/ems-api/)
+
+## Pre requisites & Installation for Ems-api 
 
 #### Ems-api
 
