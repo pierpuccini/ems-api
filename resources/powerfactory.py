@@ -43,14 +43,14 @@ class LoadFlow(Resource):
         if elem_type == 'terminals':
             # collect all relevant terminals
             print("Collecting all calculation relevant terminals..")
-            formatted_voltage = terminal_info(pf_app)
+            terminals = terminal_info(pf_app)
             print("All relevant calculations collected")
 
         # print to PowerFactory output window
         print("Python Script ended.")
         prj[0].Deactivate()
 
-        return Response(dumps(formatted_voltage), mimetype="application/json", status=200)
+        return Response(dumps(terminals), mimetype="application/json", status=200)
     # def get(self):
     #   movies = Movie.objects().to_json()
     #   return Response(movies, mimetype="application/json", status=200)
