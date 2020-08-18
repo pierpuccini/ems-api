@@ -4,14 +4,16 @@ from flask_restful import Resource
 
 from json import dumps
 
+from methods.terminals import terminal_info
+
 sys.path.append("C:\\Program Files (x86)\\DIgSILENT\\PowerFactory 15.1\\python")
 
 # connect to PowerFactory
 import powerfactory as pf
 
 
-class TensionApi(Resource):
-    def get(self):
+class LoadFlow(Resource):
+    def get(self, elem_type):
         pf_app = pf.GetApplication()
         if pf_app is None:
             # raise Exception("getting PowerFactory application failed")
@@ -38,27 +40,15 @@ class TensionApi(Resource):
         # execute load flow
         ldf.Execute()
 
-        # collect all relevant terminals
-        print("Collecting all calculation relevant terminals..")
-        terminals = pf_app.GetCalcRelevantObjects("*.ElmTerm")
-        if not terminals:
-            # raise Exception("No calculation relevant terminals found")
-            return Response("No calculation relevant terminals found", mimetype="application/json", status=401)
-        print("Number of terminals found: %d" % len(terminals))
-
-        formatted_voltage = []
-        for terminal in terminals:
-            voltage = terminal.GetAttribute("m:u")
-
-            print("Voltage at terminal %s is %f p.u." % (terminal.GetNodeName(), voltage))
-            print("Voltage at terminal %s is %f p.u." % (terminal.cDisplayName, voltage))
-
-            voltage_string = "Voltage at terminal " + terminal.cDisplayName + " is " + str(voltage) + " p.u."
-
-            formatted_voltage.append(voltage_string)
+        if elem_type == 'terminals':
+            # collect all relevant terminals
+            print("Collecting all calculation relevant terminals..")
+            formatted_voltage = terminal_info(pf_app)
+            print("All relevant calculations collected")
 
         # print to PowerFactory output window
         print("Python Script ended.")
+        prj[0].Deactivate()
 
         return Response(dumps(formatted_voltage), mimetype="application/json", status=200)
     # def get(self):

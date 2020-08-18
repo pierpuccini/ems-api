@@ -8,6 +8,8 @@
         <list>
           <mapping local-root="$PROJECT_DIR$/app.py" remote-root="Z:/ems-api/app.py" />
           <mapping local-root="$PROJECT_DIR$/resources/powerfactory.py" remote-root="Z:/ems-api/resources/powerfactory.py" />
+          <mapping local-root="$PROJECT_DIR$/methods" remote-root="Z:/ems-api/methods" />
+          <mapping local-root="$PROJECT_DIR$" remote-root="Z:/ems-api" />
         </list>
       </option>
     </PathMappingSettings>
