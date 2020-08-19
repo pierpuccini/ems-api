@@ -13,7 +13,7 @@ import powerfactory as pf
 
 
 class LoadFlow(Resource):
-    def get(self, elem_type):
+    def get(self, project, elem_type, tension_type):
         pf_app = pf.GetApplication()
         if pf_app is None:
             # raise Exception("getting PowerFactory application failed")
@@ -30,7 +30,7 @@ class LoadFlow(Resource):
             # raise Exception("No project activated. Python Script stopped.")
             return Response("No project activated. Python Script stopped.", mimetype="application/json", status=401)
 
-        prj[0].Activate()
+        prj[int(project)].Activate()
         # retrieve load-flow object
         ldf = pf_app.GetFromStudyCase("ComLdf")
 
@@ -39,18 +39,35 @@ class LoadFlow(Resource):
 
         # execute load flow
         ldf.Execute()
-
-        if elem_type == 'terminals':
+        parsed_response = {}
+        if elem_type == 'all':
             # collect all relevant terminals
-            print("Collecting all calculation relevant terminals..")
-            terminals = terminal_info(pf_app)
+            terminals = pf_app.GetCalcRelevantObjects("*.ElmTerm")
+            if not terminals:
+                # raise Exception("No calculation relevant terminals found")
+                return Response("No terminals found", mimetype="application/json", status=401)
+            print("Number of terminals found: %d" % len(terminals))
+
+            print("Collecting all calculation relevant to terminals..")
+            parsed_response['terminals'] = terminal_info(terminals, tension_type)
             print("All relevant calculations collected")
+        elif elem_type == 'terminals':
+            # collect all relevant terminals
+            terminals = pf_app.GetCalcRelevantObjects("*.ElmTerm")
+            if not terminals:
+                # raise Exception("No calculation relevant terminals found")
+                return Response("No terminals found", mimetype="application/json", status=401)
+            print("Number of terminals found: %d" % len(terminals))
+
+            print("Collecting all calculation relevant to terminals..")
+            parsed_response['terminals'] = terminal_info(terminals, tension_type)
+            print("All relevant calculations to terminals collected")
 
         # print to PowerFactory output window
         print("Python Script ended.")
-        prj[0].Deactivate()
+        prj[int(project)].Deactivate()
 
-        return Response(dumps(terminals), mimetype="application/json", status=200)
+        return Response(dumps(parsed_response), mimetype="application/json", status=200)
     # def get(self):
     #   movies = Movie.objects().to_json()
     #   return Response(movies, mimetype="application/json", status=200)
