@@ -4,7 +4,7 @@ from flask_restful import Resource
 
 from json import dumps
 
-from methods.terminals import terminal_info
+from methods.pfMethods import terminal_info, line_info
 
 sys.path.append("C:\\Program Files (x86)\\DIgSILENT\\PowerFactory 15.1\\python")
 
@@ -41,26 +41,42 @@ class LoadFlow(Resource):
         ldf.Execute()
         parsed_response = {}
         if elem_type == 'all':
-            # collect all relevant terminals
+            # collect all relevant terminals, lines
             terminals = pf_app.GetCalcRelevantObjects("*.ElmTerm")
             if not terminals:
                 # raise Exception("No calculation relevant terminals found")
                 return Response("No terminals found", mimetype="application/json", status=401)
             print("Number of terminals found: %d" % len(terminals))
 
+            lines = pf_app.GetCalcRelevantObjects("*.Elmlne")
+            if not lines:
+                return Response("No lines found", mimetype="application/json", status=401)
+            print("Number of lines found: %d" % len(lines))
+
             print("Collecting all calculation relevant to terminals..")
             parsed_response['terminals'] = terminal_info(terminals, tension_type)
+
+            print("Collecting all calculation relevant to lines..")
+            parsed_response['lines'] = line_info(lines, tension_type)
+
             print("All relevant calculations collected")
         elif elem_type == 'terminals':
-            # collect all relevant terminals
             terminals = pf_app.GetCalcRelevantObjects("*.ElmTerm")
             if not terminals:
-                # raise Exception("No calculation relevant terminals found")
                 return Response("No terminals found", mimetype="application/json", status=401)
             print("Number of terminals found: %d" % len(terminals))
 
             print("Collecting all calculation relevant to terminals..")
             parsed_response['terminals'] = terminal_info(terminals, tension_type)
+            print("All relevant calculations to terminals collected")
+        elif elem_type == 'lines':
+            lines = pf_app.GetCalcRelevantObjects("*.ElmLne")
+            if not lines:
+                return Response("No lines found", mimetype="application/json", status=401)
+            print("Number of lines found: %d" % len(lines))
+
+            print("Collecting all calculation relevant to lines..")
+            parsed_response['lines'] = line_info(lines, tension_type)
             print("All relevant calculations to terminals collected")
 
         # print to PowerFactory output window
