@@ -1,7 +1,7 @@
 import constants
 
 
-def terminal_info(terminals, tension_type):
+def terminal_info(terminals, tension_type, total_terminals):
     formatted_terminals = {}
     for terminal in terminals:
         voltage_magnitude = terminal.GetAttribute(constants.MAGNITUDE)
@@ -41,6 +41,7 @@ def terminal_info(terminals, tension_type):
                 'reactive_flow': {"value": reactive_flow, "unit": reactive_flow_unit[0]},
                 'active_gen': {"value": active_gen, "unit": active_gen_unit[0]},
                 'reactive_gen': {"value": reactive_gen, "unit": reactive_gen_unit[0]},
+                'total': total_terminals
             }
         elif voltage_line_magnitude <= 57.5:
             formatted_terminals[terminal.loc_name] = {
@@ -53,61 +54,46 @@ def terminal_info(terminals, tension_type):
                 'reactive_flow': {"value": reactive_flow, "unit": reactive_flow_unit[0]},
                 'active_gen': {"value": active_gen, "unit": active_gen_unit[0]},
                 'reactive_gen': {"value": reactive_gen, "unit": reactive_gen_unit[0]},
+                'total': total_terminals
             }
 
         print('Terminals formatted')
     return formatted_terminals
 
 
-def line_info(lines, tension_type):
+def line_info(lines, total_lines):
     formatted_lines = {}
     for line in lines:
-        v_line_line = line.GetAttribute(constants.LINE_LINE_MAGNITUDE_LINES)
-        v_line_line_unit = line.GetAttributeUnit(constants.LINE_LINE_MAGNITUDE_LINES)
+        loading = line.GetAttribute(constants.LOADING)
+        loading_unit = line.GetAttributeUnit(constants.LOADING)
 
-        current_magnitude = line.GetAttribute(constants.CURRENT_MAGNITUDE)
-        current_magnitude_unit = line.GetAttributeUnit(constants.CURRENT_MAGNITUDE)
+        max_loading = line.GetAttribute(constants.MAX_LOADING)
+        max_loading_unit = line.GetAttributeUnit(constants.MAX_LOADING)
 
-        active_power = line.GetAttribute(constants.ACTIVE_POWER)
-        active_power_unit = line.GetAttributeUnit(constants.ACTIVE_POWER)
+        formatted_lines[line.loc_name] = {
+            'loading': {"value": loading, "unit": loading_unit[0]},
+            'max_loading': {"value": max_loading, "unit": max_loading_unit[0]},
+            'total': total_lines
+        }
 
-        reactive_power = line.GetAttribute(constants.REACTIVE_POWER)
-        reactive_power_unit = line.GetAttributeUnit(constants.REACTIVE_POWER)
-
-        total_active_power = line.GetAttribute(constants.TOTAL_ACTIVE_POWER)
-        total_active_power_unit = line.GetAttributeUnit(constants.TOTAL_ACTIVE_POWER)
-
-        total_reactive_power = line.GetAttribute(constants.TOTAL_REACTIVE_POWER)
-        total_reactive_power_unit = line.GetAttributeUnit(constants.TOTAL_REACTIVE_POWER)
-
-        active_power_losses = line.GetAttribute(constants.ACTIVE_LOSSES_TOTAL)
-        active_power_losses_unit = line.GetAttributeUnit(constants.ACTIVE_LOSSES_TOTAL)
-
-        reactive_power_losses = line.GetAttribute(constants.REACTIVE_LOSSES_TOTAL)
-        reactive_power_losses_unit = line.GetAttributeUnit(constants.REACTIVE_LOSSES_TOTAL)
-
-        if tension_type == "all":
-            formatted_lines[line.loc_name] = {
-                'line_voltage': {"value": v_line_line, "unit": v_line_line_unit[0]},
-                'current': {"value": current_magnitude, "unit": current_magnitude_unit[0]},
-                'active': {"value": active_power, "unit": active_power_unit[0]},
-                'reactive': {"value": reactive_power, "unit": reactive_power_unit[0]},
-                'total_active': {"value": total_active_power, "unit": total_active_power_unit[0]},
-                'total_reactive': {"value": total_reactive_power, "unit": total_reactive_power_unit[0]},
-                'active_losses': {"value": active_power_losses, "unit": active_power_losses_unit[0]},
-                'reactive_losss': {"value": reactive_power_losses, "unit": reactive_power_losses_unit[0]},
-            }
-        elif voltage_line_magnitude <= 57.5:
-            formatted_lines[line.loc_name] = {
-                'line_voltage': {"value": v_line_line, "unit": v_line_line_unit[0]},
-                'current': {"value": current_magnitude, "unit": current_magnitude_unit[0]},
-                'active': {"value": active_power, "unit": active_power_unit[0]},
-                'reactive': {"value": reactive_power, "unit": reactive_power_unit[0]},
-                'total_active': {"value": total_active_power, "unit": total_active_power_unit[0]},
-                'total_reactive': {"value": total_reactive_power, "unit": total_reactive_power_unit[0]},
-                'active_losses': {"value": active_power_losses, "unit": active_power_losses_unit[0]},
-                'reactive_losss': {"value": reactive_power_losses, "unit": reactive_power_losses_unit[0]},
-            }
-
-        print('Terminals formatted')
+        print('Lines formatted')
     return formatted_lines
+
+
+def transformer_info(transformers, total_transformers):
+    formatted_transformers = {}
+    for transformer in transformers:
+        loading = transformer.GetAttribute(constants.LOADING)
+        loading_unit = transformer.GetAttributeUnit(constants.LOADING)
+
+        max_loading = transformer.GetAttribute(constants.MAX_LOADING)
+        max_loading_unit = transformer.GetAttributeUnit(constants.MAX_LOADING)
+
+        formatted_transformers[transformer.loc_name] = {
+            'loading': {"value": loading, "unit": loading_unit[0]},
+            'max_loading': {"value": max_loading, "unit": max_loading_unit[0]},
+            'total': total_transformers
+        }
+
+        print('Transformers formatted')
+    return formatted_transformers
