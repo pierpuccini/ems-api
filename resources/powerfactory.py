@@ -4,7 +4,7 @@ from flask_restful import Resource
 
 from json import dumps
 
-from methods.pfMethods import terminal_info, line_info
+from methods.pfMethods import terminal_info, line_info, transformer_info, generator_info, load_info
 
 sys.path.append("C:\\Program Files (x86)\\DIgSILENT\\PowerFactory 15.1\\python")
 
@@ -96,8 +96,7 @@ class LoadFlow(Resource):
             parsed_response['transformers'] = transformer_info(transformers, len(transformers))
             print("All relevant calculations to transformers collected")
         elif elem_type == 'generators':
-            # TODO: WIRE UP GENERATORS AND LOADS
-            generators = pf_app.GetCalcRelevantObjects("*.ElmTr2")
+            generators = pf_app.GetCalcRelevantObjects("*.ElmSym")
             if not generators:
                 return Response("No lines found", mimetype="application/json", status=401)
             print("Number of generators found: %d" % len(generators))
@@ -105,6 +104,15 @@ class LoadFlow(Resource):
             print("Collecting all calculation relevant to generators..")
             parsed_response['generators'] = generator_info(generators, tension_type, len(generators))
             print("All relevant calculations to generators collected")
+        elif elem_type == 'loads':
+            loads = pf_app.GetCalcRelevantObjects("*.ElmLod")
+            if not loads:
+                return Response("No lines found", mimetype="application/json", status=401)
+            print("Number of loads found: %d" % len(loads))
+
+            print("Collecting all calculation relevant to loads..")
+            parsed_response['loads'] = load_info(loads, tension_type, len(loads))
+            print("All relevant calculations to loads collected")
 
         # print to PowerFactory output window
         print("Python Script ended.")

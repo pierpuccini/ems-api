@@ -16,6 +16,7 @@ def hello():
 
 
 if __name__ == '__main__':
+    print('main')
     import pydevd_pycharm
 
     pydevd_pycharm.settrace('192.168.0.92', port=21000, stdoutToServer=True, stderrToServer=True)
