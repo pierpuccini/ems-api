@@ -1,4 +1,5 @@
 import sys
+import time
 from flask import Response, request, jsonify
 from flask_restful import Resource
 
@@ -30,6 +31,10 @@ class LoadFlow(Resource):
             # raise Exception("No project activated. Python Script stopped.")
             return Response("No project activated. Python Script stopped.", mimetype="application/json", status=401)
 
+        t = time.localtime()
+        current_time = time.strftime("%H:%M:%S", t)
+        print(current_time)
+        
         prj[int(project)].Activate()
         # retrieve load-flow object
         ldf = pf_app.GetFromStudyCase("ComLdf")

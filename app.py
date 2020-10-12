@@ -21,5 +21,5 @@ if __name__ != '__main__':
 
     pydevd_pycharm.settrace('192.168.0.92', port=21000, stdoutToServer=True, stderrToServer=True)
 
-app.run(host='0.0.0.0')
+app.run(host='0.0.0.0', debug=False)
 
