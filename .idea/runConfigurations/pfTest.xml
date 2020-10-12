@@ -6,10 +6,10 @@
     <PathMappingSettings>
       <option name="pathMappings">
         <list>
-          <mapping local-root="$PROJECT_DIR$/app.py" remote-root="Z:/ems-api/app.py" />
-          <mapping local-root="$PROJECT_DIR$/resources/powerfactory.py" remote-root="Z:/ems-api/resources/powerfactory.py" />
-          <mapping local-root="$PROJECT_DIR$/methods" remote-root="Z:/ems-api/methods" />
-          <mapping local-root="$PROJECT_DIR$" remote-root="Z:/ems-api" />
+          <mapping local-root="$PROJECT_DIR$/app.py" remote-root="C:/Users/piercarlo puccini/Documents/Development/Proyecto Final/ems-api/app.py" />
+          <mapping local-root="$PROJECT_DIR$/resources/powerfactory.py" remote-root="C:/Users/piercarlo puccini/Documents/Development/Proyecto Final/ems-api/resources/powerfactory.py" />
+          <mapping local-root="$PROJECT_DIR$/methods" remote-root="C:/Users/piercarlo puccini/Documents/Development/Proyecto Final/ems-api/methods" />
+          <mapping local-root="$PROJECT_DIR$" remote-root="C:/Users/piercarlo puccini/Documents/Development/Proyecto Final/ems-api" />
         </list>
       </option>
     </PathMappingSettings>
