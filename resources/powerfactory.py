@@ -36,11 +36,11 @@ class LoadFlow(Resource):
         print(current_time)
         time_project = project
         # TODO: CHANGE TIME PROJECT IN ORDER TO MATCH PROPER PROJECT
-        if current_time > "6:00" & current_time < "11:59":
+        if "6:00" < current_time < "11:59":
             time_project = 0
-        elif current_time > "12:00" & current_time < "17:59":
+        elif "12:00" < current_time < "17:59":
             time_project = 0
-        elif current_time > "18:00" & current_time < "5:59":
+        elif "18:00" < current_time < "5:59":
             time_project = 0
         prj[int(time_project)].Activate()
         # retrieve load-flow object
