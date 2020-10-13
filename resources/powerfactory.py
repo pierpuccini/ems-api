@@ -87,7 +87,7 @@ class LoadFlow(Resource):
             parsed_response['lines'] = line_info(lines, len(lines))
 
             print("Collecting all calculation relevant to transformers..")
-            parsed_response['transformers'] = transformer_info(lines, len(transformers))
+            parsed_response['transformers'] = transformer_info(transformers, len(transformers))
 
             print("Collecting all calculation relevant to generators..")
             parsed_response['generators'] = generator_info(generators, tension_type, len(generators))
