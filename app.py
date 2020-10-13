@@ -1,7 +1,9 @@
 import sys
-from flask import Flask
+from flask import Flask, Response
 from flask_restful import Api
 from resources.routes import initialize_routes
+
+from json import dumps
 
 sys.path.append("C:\\Program Files\\JetBrains\\PyCharm 2020.2\\debug-eggs\\pydevd-pycharm.egg")
 
@@ -12,10 +14,11 @@ initialize_routes(api)
 
 @app.route('/api')
 def hello():
-    return {
+    base_response = {
         'textValue': 'API Started',
         'value': True,
     }
+    return Response(dumps(base_response), mimetype="application/json", status=200)
 
 
 if __name__ != '__main__':
