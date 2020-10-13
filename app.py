@@ -12,7 +12,10 @@ initialize_routes(api)
 
 @app.route('/api')
 def hello():
-    return 'Api started'
+    return {
+        'textValue': 'API Started',
+        'value': True,
+    }
 
 
 if __name__ != '__main__':
