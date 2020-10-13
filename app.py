@@ -16,7 +16,7 @@ initialize_routes(api)
 def hello():
     base_response = {
         'textValue': 'API Started',
-        'value': 0
+        'value': 1
     }
     return Response(dumps(base_response), mimetype="application/json", status=200)
 
