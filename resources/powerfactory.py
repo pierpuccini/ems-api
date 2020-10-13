@@ -70,6 +70,16 @@ class LoadFlow(Resource):
                 return Response("No transformers found", mimetype="application/json", status=401)
             print("Number of transformers found: %d" % len(transformers))
 
+            generators = pf_app.GetCalcRelevantObjects("*.ElmSym")
+            if not generators:
+                return Response("No lines found", mimetype="application/json", status=401)
+            print("Number of generators found: %d" % len(generators))
+
+            loads = pf_app.GetCalcRelevantObjects("*.ElmLod")
+            if not loads:
+                return Response("No lines found", mimetype="application/json", status=401)
+            print("Number of loads found: %d" % len(loads))
+
             print("Collecting all calculation relevant to terminals..")
             parsed_response['terminals'] = terminal_info(terminals, tension_type, len(terminals))
 
@@ -78,6 +88,12 @@ class LoadFlow(Resource):
 
             print("Collecting all calculation relevant to transformers..")
             parsed_response['transformers'] = transformer_info(lines, len(transformers))
+
+            print("Collecting all calculation relevant to generators..")
+            parsed_response['generators'] = generator_info(generators, tension_type, len(generators))
+
+            print("Collecting all calculation relevant to loads..")
+            parsed_response['loads'] = load_info(loads, tension_type, len(loads))
 
             print("All relevant calculations collected")
         elif elem_type == 'terminals':
