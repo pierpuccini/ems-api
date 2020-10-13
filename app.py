@@ -1,4 +1,6 @@
 import sys
+import os
+
 from flask import Flask, Response
 from flask_restful import Api
 from resources.routes import initialize_routes
@@ -14,9 +16,10 @@ initialize_routes(api)
 
 @app.route('/api')
 def hello():
+    pid = os.getpid()
     base_response = {
         'textValue': 'API Started',
-        'value': True
+        'pid': pid
     }
     return Response(dumps(base_response), mimetype="application/json", status=200)
 
