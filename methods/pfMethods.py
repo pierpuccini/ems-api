@@ -55,7 +55,7 @@ def terminal_info(terminals, tension_type, total_terminals):
                 'reactive_gen': {"value": reactive_gen, "unit": reactive_gen_unit[0]}
             }
 
-        print('Terminals formatted')
+    print('Terminals formatted')
     return formatted_terminals
 
 
@@ -73,7 +73,7 @@ def line_info(lines, total_lines):
             'max_loading': {"value": max_loading, "unit": max_loading_unit[0]}
         }
 
-        print('Lines formatted')
+    print('Lines formatted')
     return formatted_lines
 
 
@@ -91,7 +91,7 @@ def transformer_info(transformers, total_transformers):
             'max_loading': {"value": max_loading, "unit": max_loading_unit[0]}
         }
 
-        print('Transformers formatted')
+    print('Transformers formatted')
     return formatted_transformers
 
 
@@ -113,7 +113,7 @@ def generator_info(generators, tension_type, total_generators):
             'reactive_power': {"value": reactive_power, "unit": reactive_power_unit[0]}
         }
 
-        print('Generators formatted')
+    print('Generators formatted')
     return formatted_generators
 
 
@@ -139,5 +139,5 @@ def load_info(loads, tension_type, total_loads):
             'nominal_voltage': {"value": nominal_voltage, "unit": nominal_voltage_unit[0]}
         }
 
-        print('Loads formatted')
+    print('Loads formatted')
     return formatted_loads
