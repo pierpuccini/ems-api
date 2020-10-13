@@ -10,7 +10,7 @@ app = Flask(__name__)
 api = Api(app)
 initialize_routes(api)
 
-@app.route('/')
+@app.route('/api')
 def hello():
     return 'Api started'
 
