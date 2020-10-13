@@ -32,10 +32,17 @@ class LoadFlow(Resource):
             return Response("No project activated. Python Script stopped.", mimetype="application/json", status=401)
 
         t = time.localtime()
-        current_time = time.strftime("%H:%M:%S", t)
+        current_time = time.strftime("%H:%M", t)
         print(current_time)
-        
-        prj[int(project)].Activate()
+        time_project = project
+        # TODO: CHANGE TIME PROJECT IN ORDER TO MATCH PROPER PROJECT
+        if current_time > "6:00" & current_time < "11:59":
+            time_project = 0
+        elif current_time > "12:00" & current_time < "17:59":
+            time_project = 0
+        elif current_time > "18:00" & current_time < "5:59":
+            time_project = 0
+        prj[int(time_project)].Activate()
         # retrieve load-flow object
         ldf = pf_app.GetFromStudyCase("ComLdf")
 
