@@ -15,6 +15,7 @@ import powerfactory as pf
 
 class LoadFlow(Resource):
     def get(self, project, elem_type, tension_type):
+        global prj
         pf_app = pf.GetApplication()
         if pf_app is None:
             # raise Exception("getting PowerFactory application failed")
