@@ -33,7 +33,7 @@ class LoadFlow(Resource):
 
         t = time.localtime()
         current_time = time.strftime("%H:%M", t)
-        print('\033[92m' + current_time + '\033[0m')
+        print('Current time: ' + current_time)
         if "0:00" < current_time < "0:59":
             time_project = 0
         elif "1:00" < current_time < "1:59":
@@ -84,6 +84,7 @@ class LoadFlow(Resource):
             time_project = 23
 
         prj[int(time_project)].Activate()
+        print('Project name: ' + prj[int(time_project)].loc_name)
         # retrieve load-flow object
         ldf = pf_app.GetFromStudyCase("ComLdf")
 
@@ -184,7 +185,7 @@ class LoadFlow(Resource):
             print("All relevant calculations to loads collected")
 
         # print to PowerFactory output window
-        print('\033[94m' + "Python Script ended." + '\033[0m')
+        print("Python Script ended.")
         prj[int(time_project)].Deactivate()
 
         return Response(dumps(parsed_response), mimetype="application/json", status=200)
