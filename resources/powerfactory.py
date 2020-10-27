@@ -12,10 +12,11 @@ sys.path.append("C:\\Program Files (x86)\\DIgSILENT\\PowerFactory 15.1\\python")
 # connect to PowerFactory
 import powerfactory as pf
 
+global prj
+
 
 class LoadFlow(Resource):
     def get(self, project, elem_type, tension_type):
-        global prj
         pf_app = pf.GetApplication()
         if pf_app is None:
             # raise Exception("getting PowerFactory application failed")
