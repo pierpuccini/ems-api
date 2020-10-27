@@ -82,6 +82,10 @@ class LoadFlow(Resource):
             time_project = 22
         elif "23:00" < current_time < "23:59":
             time_project = 23
+        else:
+            time_project = 0
+
+        print(time_project)
 
         prj[int(time_project)].Activate()
         print('Project name: ' + prj[int(time_project)].loc_name)
