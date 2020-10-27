@@ -86,7 +86,8 @@ class LoadFlow(Resource):
 
         print(time_project)
 
-        prj[int(time_project)].Activate()
+        prj = prj[int(time_project)]
+        prj.Activate()
         print('Project name: ' + prj[int(time_project)].loc_name)
 
         # get active project
