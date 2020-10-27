@@ -33,15 +33,56 @@ class LoadFlow(Resource):
 
         t = time.localtime()
         current_time = time.strftime("%H:%M", t)
-        print(current_time)
-        time_project = project
-        # TODO: CHANGE TIME PROJECT IN ORDER TO MATCH PROPER PROJECT
-        if "6:00" < current_time < "11:59":
+        print('\033[92m' + current_time + '\033[0m')
+        if "0:00" < current_time < "0:59":
             time_project = 0
-        elif "12:00" < current_time < "17:59":
-            time_project = 0
-        elif "18:00" < current_time < "5:59":
-            time_project = 0
+        elif "1:00" < current_time < "1:59":
+            time_project = 1
+        elif "2:00" < current_time < "2:59":
+            time_project = 2
+        elif "3:00" < current_time < "3:59":
+            time_project = 3
+        elif "4:00" < current_time < "4:59":
+            time_project = 4
+        elif "5:00" < current_time < "5:59":
+            time_project = 5
+        elif "6:00" < current_time < "6:59":
+            time_project = 6
+        elif "7:00" < current_time < "7:59":
+            time_project = 7
+        elif "8:00" < current_time < "8:59":
+            time_project = 8
+        elif "9:00" < current_time < "9:59":
+            time_project = 9
+        elif "10:00" < current_time < "10:59":
+            time_project = 10
+        elif "11:00" < current_time < "11:59":
+            time_project = 11
+        elif "12:00" < current_time < "12:59":
+            time_project = 12
+        elif "13:00" < current_time < "13:59":
+            time_project = 13
+        elif "14:00" < current_time < "14:59":
+            time_project = 14
+        elif "15:00" < current_time < "15:59":
+            time_project = 15
+        elif "16:00" < current_time < "16:59":
+            time_project = 16
+        elif "17:00" < current_time < "17:59":
+            time_project = 17
+        elif "18:00" < current_time < "18:59":
+            time_project = 18
+        elif "19:00" < current_time < "19:59":
+            time_project = 19
+        elif "20:00" < current_time < "20:59":
+            time_project = 20
+        elif "21:00" < current_time < "21:59":
+            time_project = 21
+        elif "22:00" < current_time < "22:59":
+            time_project = 22
+        elif "23:00" < current_time < "23:59":
+            time_project = 23
+
         prj[int(time_project)].Activate()
         # retrieve load-flow object
         ldf = pf_app.GetFromStudyCase("ComLdf")
@@ -143,8 +184,8 @@ class LoadFlow(Resource):
             print("All relevant calculations to loads collected")
 
         # print to PowerFactory output window
-        print("Python Script ended.")
-        prj[int(project)].Deactivate()
+        print('\033[94m' + "Python Script ended." + '\033[0m')
+        prj[int(time_project)].Deactivate()
 
         return Response(dumps(parsed_response), mimetype="application/json", status=200)
 
