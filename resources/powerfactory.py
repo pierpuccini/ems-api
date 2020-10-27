@@ -34,25 +34,25 @@ class LoadFlow(Resource):
         t = time.localtime()
         current_time = time.strftime("%H:%M", t)
         print('Current time: ' + current_time)
-        if "00:00" < current_time < "0:59":
+        if "00:00" < current_time < "00:59":
             time_project = 0
-        elif "01:00" < current_time < "1:59":
+        elif "01:00" < current_time < "01:59":
             time_project = 1
-        elif "02:00" < current_time < "2:59":
+        elif "02:00" < current_time < "02:59":
             time_project = 2
-        elif "03:00" < current_time < "3:59":
+        elif "03:00" < current_time < "03:59":
             time_project = 3
-        elif "04:00" < current_time < "4:59":
+        elif "04:00" < current_time < "04:59":
             time_project = 4
-        elif "05:00" < current_time < "5:59":
+        elif "05:00" < current_time < "05:59":
             time_project = 5
-        elif "06:00" < current_time < "6:59":
+        elif "06:00" < current_time < "06:59":
             time_project = 6
-        elif "07:00" < current_time < "7:59":
+        elif "07:00" < current_time < "07:59":
             time_project = 7
-        elif "08:00" < current_time < "8:59":
+        elif "08:00" < current_time < "08:59":
             time_project = 8
-        elif "09:00" < current_time < "9:59":
+        elif "09:00" < current_time < "09:59":
             time_project = 9
         elif "10:00" < current_time < "10:59":
             time_project = 10
