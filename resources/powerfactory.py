@@ -22,14 +22,14 @@ class LoadFlow(Resource):
         # print to PowerFactory output window
         pf_app.PrintInfo("Python Script started..")
 
-        user = pf_app.GetCurrentUser()
-        prj = user.GetContents('*.IntPrj')[0]
+        # user = pf_app.GetCurrentUser()
+        # prj = user.GetContents('*.IntPrj')[0]
 
         # get active project
         # prj = pf_app.GetActiveProject()
-        if prj is None:
-            # raise Exception("No project activated. Python Script stopped.")
-            return Response("No project activated. Python Script stopped.", mimetype="application/json", status=401)
+        # if prj is None:
+        #     # raise Exception("No project activated. Python Script stopped.")
+        #     return Response("No project activated. Python Script stopped.", mimetype="application/json", status=401)
 
         t = time.localtime()
         current_time = time.strftime("%H:%M", t)
@@ -89,6 +89,13 @@ class LoadFlow(Resource):
 
         prj[int(time_project)].Activate()
         print('Project name: ' + prj[int(time_project)].loc_name)
+
+        # get active project
+        prj = pf_app.GetActiveProject()
+        if prj is None:
+            # raise Exception("No project activated. Python Script stopped.")
+            return Response("No project activated. Python Script stopped.", mimetype="application/json", status=401)
+
         # retrieve load-flow object
         ldf = pf_app.GetFromStudyCase("ComLdf")
 
