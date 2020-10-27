@@ -194,7 +194,7 @@ class LoadFlow(Resource):
             parsed_response['loads'] = load_info(loads, tension_type, len(loads))
             print("All relevant calculations to loads collected")
 
-        # prj[int(time_project)].Deactivate()
+        prj.Deactivate()
         print("Python Script ended.")
 
         return Response(dumps(parsed_response), mimetype="application/json", status=200)
