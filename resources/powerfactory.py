@@ -204,7 +204,7 @@ class LoadFlow(Resource):
         return Response(dumps(parsed_response), mimetype="application/json", status=200)
 
     def post(self, project, elem_type, tension_type):
-        body = request.json
+        body = request.data
         pf_app = pf.GetApplication()
         if pf_app is None:
             # raise Exception("getting PowerFactory application failed")
