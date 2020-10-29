@@ -151,6 +151,8 @@ class LoadFlow(Resource):
 
         return Response(dumps(parsed_response), mimetype="application/json", status=200)
 
+
+class SetLoadFlow(Resource):
     def post(self, project, elem_type, tension_type):
         data = request.data
         for k, v in data:
