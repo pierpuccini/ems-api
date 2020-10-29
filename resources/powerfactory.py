@@ -153,7 +153,7 @@ class LoadFlow(Resource):
 
 
 class SetLoadFlow(Resource):
-    def post(self, project, elem_type, tension_type):
+    def post(self):
         data = request.data
         for k, v in data:
             element = k
