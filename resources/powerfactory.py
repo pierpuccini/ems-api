@@ -155,9 +155,8 @@ class LoadFlow(Resource):
 class SetLoadFlow(Resource):
     def post(self):
         data = request.data
-        for k, v in data:
-            element = k
-            value = v
+        element = data.keys()
+        value = data.values()
         pf_app = pf.GetApplication()
         if pf_app is None:
             # raise Exception("getting PowerFactory application failed")
