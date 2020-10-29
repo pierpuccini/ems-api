@@ -182,7 +182,7 @@ class SetLoadFlow(Resource):
             # raise Exception("No project activated. Python Script stopped.")
             return Response("No project activated. Python Script stopped.", mimetype="application/json", status=401)
 
-        if 'Load' in element:
+        if 'Load' in element[0]:
             loads = pf_app.GetCalcRelevantObjects("*.ElmLod")
             if not loads:
                 return Response("No lines found", mimetype="application/json", status=401)
