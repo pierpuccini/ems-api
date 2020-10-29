@@ -1,4 +1,5 @@
 import constants
+import time
 
 
 def terminal_info(terminals, tension_type, total_terminals):
@@ -141,3 +142,68 @@ def load_info(loads, tension_type, total_loads):
 
     print('Loads formatted')
     return formatted_loads
+
+
+def set_load(loads, load_to_set, value):
+    for load in loads:
+        if load.loc_name == load_to_set:
+            load.plini = value
+    return loads
+
+
+def set_time():
+    t = time.localtime()
+    current_time = time.strftime("%H:%M", t)
+    print('Current time: ' + current_time)
+    if "00:00" < current_time <= "00:59":
+        time_project = 0
+    elif "01:00" <= current_time <= "01:59":
+        time_project = 1
+    elif "02:00" <= current_time <= "02:59":
+        time_project = 2
+    elif "03:00" <= current_time <= "03:59":
+        time_project = 3
+    elif "04:00" <= current_time <= "04:59":
+        time_project = 4
+    elif "05:00" <= current_time <= "05:59":
+        time_project = 5
+    elif "06:00" <= current_time <= "06:59":
+        time_project = 6
+    elif "07:00" <= current_time <= "07:59":
+        time_project = 7
+    elif "08:00" <= current_time <= "08:59":
+        time_project = 8
+    elif "09:00" <= current_time <= "09:59":
+        time_project = 9
+    elif "10:00" <= current_time <= "10:59":
+        time_project = 10
+    elif "11:00" <= current_time <= "11:59":
+        time_project = 11
+    elif "12:00" <= current_time <= "12:59":
+        time_project = 12
+    elif "13:00" <= current_time <= "13:59":
+        time_project = 13
+    elif "14:00" <= current_time <= "14:59":
+        time_project = 14
+    elif "15:00" <= current_time <= "15:59":
+        time_project = 15
+    elif "16:00" <= current_time <= "16:59":
+        time_project = 16
+    elif "17:00" <= current_time <= "17:59":
+        time_project = 17
+    elif "18:00" <= current_time <= "18:59":
+        time_project = 18
+    elif "19:00" <= current_time <= "19:59":
+        time_project = 19
+    elif "20:00" <= current_time <= "20:59":
+        time_project = 20
+    elif "21:00" <= current_time <= "21:59":
+        time_project = 21
+    elif "22:00" <= current_time <= "22:59":
+        time_project = 22
+    elif "23:00" <= current_time <= "23:59":
+        time_project = 23
+    else:
+        time_project = 0
+
+    return time_project
