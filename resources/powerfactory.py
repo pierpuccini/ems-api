@@ -187,7 +187,7 @@ class SetLoadFlow(Resource):
             if not loads:
                 return Response("No lines found", mimetype="application/json", status=401)
             print("Number of loads found: %d" % len(loads))
-            loads = set_load(loads, element, value)
+            set_load(loads, element, value)
 
         # retrieve load-flow object
         ldf = pf_app.GetFromStudyCase("ComLdf")
