@@ -226,7 +226,7 @@ class SetLoadFlow(Resource):
         print("Number of loads found: %d" % len(loads))
 
         print("Collecting all calculation relevant to terminals..")
-        parsed_response['terminals'] = terminal_info(terminals, tension_type, len(terminals))
+        parsed_response['terminals'] = terminal_info(terminals, 57.5, len(terminals))
 
         print("Collecting all calculation relevant to lines..")
         parsed_response['lines'] = line_info(lines, len(lines))
@@ -235,10 +235,10 @@ class SetLoadFlow(Resource):
         parsed_response['transformers'] = transformer_info(transformers, len(transformers))
 
         print("Collecting all calculation relevant to generators..")
-        parsed_response['generators'] = generator_info(generators, tension_type, len(generators))
+        parsed_response['generators'] = generator_info(generators, 57.5, len(generators))
 
         print("Collecting all calculation relevant to loads..")
-        parsed_response['loads'] = load_info(loads, tension_type, len(loads))
+        parsed_response['loads'] = load_info(loads, 57.5, len(loads))
 
         print("All relevant calculations collected")
 
