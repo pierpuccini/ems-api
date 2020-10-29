@@ -154,7 +154,7 @@ class LoadFlow(Resource):
 
 class SetLoadFlow(Resource):
     def post(self):
-        data = json.loads(request.data.decode('utf-8'))
+        data = loads(request.data.decode('utf-8'))
         element = data.keys()
         value = data.values()
         pf_app = pf.GetApplication()
