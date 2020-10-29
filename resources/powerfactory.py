@@ -156,8 +156,8 @@ class LoadFlow(Resource):
 class SetLoadFlow(Resource):
     def post(self):
         data = ast.literal_eval(request.data.decode('utf-8')).items()
-        element = data[0]
-        value = data[1]
+        element = list(data)[0]
+        value = list(data)[1]
         pf_app = pf.GetApplication()
         if pf_app is None:
             # raise Exception("getting PowerFactory application failed")
