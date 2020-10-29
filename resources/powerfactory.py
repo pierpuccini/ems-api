@@ -1,11 +1,13 @@
 import sys
 import time
 from flask import Response, request, jsonify
-from flask_restful import Resource
+from flask_restful import Resource, reqparse
 
 from json import dumps
 
 from methods.pfMethods import terminal_info, line_info, transformer_info, generator_info, load_info
+
+parser = reqparse.RequestParser()
 
 sys.path.append("C:\\Program Files (x86)\\DIgSILENT\\PowerFactory 15.1\\python")
 
@@ -202,6 +204,8 @@ class LoadFlow(Resource):
         return Response(dumps(parsed_response), mimetype="application/json", status=200)
 
     def post(self, project, elem_type, tension_type):
+        parser.add_argument('active_power', type=float)
+        args = parser.parse_args()
         pf_app = pf.GetApplication()
         if pf_app is None:
             # raise Exception("getting PowerFactory application failed")
