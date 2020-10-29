@@ -1,4 +1,4 @@
-from .powerfactory import LoadFlow
+from .powerfactory import LoadFlow, SetLoadFlow
 
 
 def initialize_routes(api):
