@@ -156,8 +156,8 @@ class LoadFlow(Resource):
 class SetLoadFlow(Resource):
     def post(self):
         data = ast.literal_eval(request.data.decode('utf-8'))
-        element = data.keys()[0]
-        value = data.values()[0]
+        element = data.keys()
+        value = data.values()
         pf_app = pf.GetApplication()
         if pf_app is None:
             # raise Exception("getting PowerFactory application failed")
@@ -187,7 +187,7 @@ class SetLoadFlow(Resource):
             if not loads:
                 return Response("No lines found", mimetype="application/json", status=401)
             print("Number of loads found: %d" % len(loads))
-            loads = set_load(loads, element, value)
+            loads = set_load(loads, element[0], value[0])
 
         # retrieve load-flow object
         ldf = pf_app.GetFromStudyCase("ComLdf")
