@@ -198,49 +198,49 @@ class SetLoadFlow(Resource):
         # execute load flow
         ldf.Execute()
         parsed_response = {}
-        if elem_type == 'all':
-            terminals = pf_app.GetCalcRelevantObjects("*.ElmTerm")
-            if not terminals:
-                # raise Exception("No calculation relevant terminals found")
-                return Response("No terminals found", mimetype="application/json", status=401)
-            print("Number of terminals found: %d" % len(terminals))
 
-            lines = pf_app.GetCalcRelevantObjects("*.Elmlne")
-            if not lines:
-                return Response("No lines found", mimetype="application/json", status=401)
-            print("Number of lines found: %d" % len(lines))
+        terminals = pf_app.GetCalcRelevantObjects("*.ElmTerm")
+        if not terminals:
+            # raise Exception("No calculation relevant terminals found")
+            return Response("No terminals found", mimetype="application/json", status=401)
+        print("Number of terminals found: %d" % len(terminals))
 
-            transformers = pf_app.GetCalcRelevantObjects("*.ElmTr2")
-            if not transformers:
-                return Response("No transformers found", mimetype="application/json", status=401)
-            print("Number of transformers found: %d" % len(transformers))
+        lines = pf_app.GetCalcRelevantObjects("*.Elmlne")
+        if not lines:
+            return Response("No lines found", mimetype="application/json", status=401)
+        print("Number of lines found: %d" % len(lines))
 
-            generators = pf_app.GetCalcRelevantObjects("*.ElmSym")
-            if not generators:
-                return Response("No lines found", mimetype="application/json", status=401)
-            print("Number of generators found: %d" % len(generators))
+        transformers = pf_app.GetCalcRelevantObjects("*.ElmTr2")
+        if not transformers:
+            return Response("No transformers found", mimetype="application/json", status=401)
+        print("Number of transformers found: %d" % len(transformers))
 
-            loads = pf_app.GetCalcRelevantObjects("*.ElmLod")
-            if not loads:
-                return Response("No lines found", mimetype="application/json", status=401)
-            print("Number of loads found: %d" % len(loads))
+        generators = pf_app.GetCalcRelevantObjects("*.ElmSym")
+        if not generators:
+            return Response("No lines found", mimetype="application/json", status=401)
+        print("Number of generators found: %d" % len(generators))
 
-            print("Collecting all calculation relevant to terminals..")
-            parsed_response['terminals'] = terminal_info(terminals, tension_type, len(terminals))
+        loads = pf_app.GetCalcRelevantObjects("*.ElmLod")
+        if not loads:
+            return Response("No lines found", mimetype="application/json", status=401)
+        print("Number of loads found: %d" % len(loads))
 
-            print("Collecting all calculation relevant to lines..")
-            parsed_response['lines'] = line_info(lines, len(lines))
+        print("Collecting all calculation relevant to terminals..")
+        parsed_response['terminals'] = terminal_info(terminals, tension_type, len(terminals))
 
-            print("Collecting all calculation relevant to transformers..")
-            parsed_response['transformers'] = transformer_info(transformers, len(transformers))
+        print("Collecting all calculation relevant to lines..")
+        parsed_response['lines'] = line_info(lines, len(lines))
 
-            print("Collecting all calculation relevant to generators..")
-            parsed_response['generators'] = generator_info(generators, tension_type, len(generators))
+        print("Collecting all calculation relevant to transformers..")
+        parsed_response['transformers'] = transformer_info(transformers, len(transformers))
 
-            print("Collecting all calculation relevant to loads..")
-            parsed_response['loads'] = load_info(loads, tension_type, len(loads))
+        print("Collecting all calculation relevant to generators..")
+        parsed_response['generators'] = generator_info(generators, tension_type, len(generators))
 
-            print("All relevant calculations collected")
+        print("Collecting all calculation relevant to loads..")
+        parsed_response['loads'] = load_info(loads, tension_type, len(loads))
+
+        print("All relevant calculations collected")
 
         prj.Deactivate()
         print("Python Script ended.")
