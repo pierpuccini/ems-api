@@ -1,9 +1,10 @@
 import sys
 import time
+import ast
 from flask import Response, request, jsonify
 from flask_restful import Resource, reqparse
 
-from json import dumps, loads
+from json import dumps
 
 from methods.pfMethods import terminal_info, line_info, transformer_info, generator_info, load_info, set_time, set_load
 
@@ -154,7 +155,7 @@ class LoadFlow(Resource):
 
 class SetLoadFlow(Resource):
     def post(self):
-        data = loads(request.data.decode('utf-8'))
+        data = ast.literal_eval(request.data.decode('utf-8'))
         element = data.keys()
         value = data.values()
         pf_app = pf.GetApplication()
