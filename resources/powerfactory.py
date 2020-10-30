@@ -6,7 +6,7 @@ from flask_restful import Resource, reqparse
 
 from json import dumps
 
-from methods.pfMethods import terminal_info, line_info, transformer_info, generator_info, load_info, set_time, set_load
+from methods.pfMethods import terminal_info, line_info, transformer_info, generator_info, load_info, set_load
 
 parser = reqparse.RequestParser()
 
