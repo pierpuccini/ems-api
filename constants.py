@@ -21,6 +21,10 @@ NOM_ACTIVE_POWER = "c:Pnom"
 NOM_REACTIVE_POWER ="c:Qnom"
 NOM_VOLTAGE = "c:u0"
 
+BASE_TARIFF = 497.09
+HIGH_TARIFF = 517.22
+LOW_TARIFF = 476.960829
+
 # Used in terminals
 "m:u"
 "m:Ul"

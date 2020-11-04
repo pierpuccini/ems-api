@@ -1,6 +1,7 @@
 import sys
 import time
 import ast
+import constants
 from flask import Response, request, jsonify
 from flask_restful import Resource, reqparse
 
@@ -35,20 +36,27 @@ class LoadFlow(Resource):
         #     return Response("No project activated. Python Script stopped.", mimetype="application/json", status=401)
 
         t = time.localtime()
+        price = constants.BASE_TARIFF
         current_time = time.strftime("%H:%M", t)
         print('Current time: ' + current_time)
         if "00:00" < current_time <= "00:59":
             time_project = 0
+            price = constants.LOW_TARIFF
         elif "01:00" <= current_time <= "01:59":
             time_project = 1
+            price = constants.LOW_TARIFF
         elif "02:00" <= current_time <= "02:59":
             time_project = 2
+            price = constants.LOW_TARIFF
         elif "03:00" <= current_time <= "03:59":
             time_project = 3
+            price = constants.LOW_TARIFF
         elif "04:00" <= current_time <= "04:59":
             time_project = 4
+            price = constants.LOW_TARIFF
         elif "05:00" <= current_time <= "05:59":
             time_project = 5
+            price = constants.LOW_TARIFF
         elif "06:00" <= current_time <= "06:59":
             time_project = 6
         elif "07:00" <= current_time <= "07:59":
@@ -71,20 +79,28 @@ class LoadFlow(Resource):
             time_project = 15
         elif "16:00" <= current_time <= "16:59":
             time_project = 16
+            price = constants.HIGH_TARIFF
         elif "17:00" <= current_time <= "17:59":
             time_project = 17
+            price = constants.HIGH_TARIFF
         elif "18:00" <= current_time <= "18:59":
             time_project = 18
+            price = constants.HIGH_TARIFF
         elif "19:00" <= current_time <= "19:59":
             time_project = 19
+            price = constants.HIGH_TARIFF
         elif "20:00" <= current_time <= "20:59":
             time_project = 20
+            price = constants.HIGH_TARIFF
         elif "21:00" <= current_time <= "21:59":
             time_project = 21
+            price = constants.HIGH_TARIFF
         elif "22:00" <= current_time <= "22:59":
             time_project = 22
+            price = constants.HIGH_TARIFF
         elif "23:00" <= current_time <= "23:59":
             time_project = 23
+            price = constants.LOW_TARIFF
         else:
             time_project = 0
 
@@ -200,6 +216,7 @@ class LoadFlow(Resource):
             print("All relevant calculations to loads collected")
 
         prj.Deactivate()
+        parsed_response['cost'] = price
         print("Python Script ended.")
 
         return Response(dumps(parsed_response), mimetype="application/json", status=200)
@@ -221,20 +238,27 @@ class SetLoadFlow(Resource):
         prj = user.GetContents('*.IntPrj')[0]
 
         t = time.localtime()
+        price = constants.BASE_TARIFF
         current_time = time.strftime("%H:%M", t)
         print('Current time: ' + current_time)
         if "00:00" < current_time <= "00:59":
             time_project = 0
+            price = constants.LOW_TARIFF
         elif "01:00" <= current_time <= "01:59":
             time_project = 1
+            price = constants.LOW_TARIFF
         elif "02:00" <= current_time <= "02:59":
             time_project = 2
+            price = constants.LOW_TARIFF
         elif "03:00" <= current_time <= "03:59":
             time_project = 3
+            price = constants.LOW_TARIFF
         elif "04:00" <= current_time <= "04:59":
             time_project = 4
+            price = constants.LOW_TARIFF
         elif "05:00" <= current_time <= "05:59":
             time_project = 5
+            price = constants.LOW_TARIFF
         elif "06:00" <= current_time <= "06:59":
             time_project = 6
         elif "07:00" <= current_time <= "07:59":
@@ -257,20 +281,28 @@ class SetLoadFlow(Resource):
             time_project = 15
         elif "16:00" <= current_time <= "16:59":
             time_project = 16
+            price = constants.HIGH_TARIFF
         elif "17:00" <= current_time <= "17:59":
             time_project = 17
+            price = constants.HIGH_TARIFF
         elif "18:00" <= current_time <= "18:59":
             time_project = 18
+            price = constants.HIGH_TARIFF
         elif "19:00" <= current_time <= "19:59":
             time_project = 19
+            price = constants.HIGH_TARIFF
         elif "20:00" <= current_time <= "20:59":
             time_project = 20
+            price = constants.HIGH_TARIFF
         elif "21:00" <= current_time <= "21:59":
             time_project = 21
+            price = constants.HIGH_TARIFF
         elif "22:00" <= current_time <= "22:59":
             time_project = 22
+            price = constants.HIGH_TARIFF
         elif "23:00" <= current_time <= "23:59":
             time_project = 23
+            price = constants.LOW_TARIFF
         else:
             time_project = 0
 
@@ -347,6 +379,7 @@ class SetLoadFlow(Resource):
         print("All relevant calculations collected")
 
         prj.Deactivate()
+        parsed_response['cost'] = price
         print("Python Script ended.")
 
         return Response(dumps(parsed_response), mimetype="application/json", status=200)
