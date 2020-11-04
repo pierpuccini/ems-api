@@ -121,9 +121,6 @@ def generator_info(generators, tension_type, total_generators):
 def load_info(loads, tension_type, total_loads):
     formatted_loads = {'$total': total_loads}
     for load in loads:
-        num_customer = load.GetAttribute(constants.NUM_CUSTOMERS)
-        num_customer_unit = load.GetAttributeUnit(constants.NUM_CUSTOMERS)
-
         nominal_active_power = load.GetAttribute(constants.NOM_ACTIVE_POWER)
         nominal_active_power_unit = load.GetAttributeUnit(constants.NOM_ACTIVE_POWER)
 
@@ -134,7 +131,6 @@ def load_info(loads, tension_type, total_loads):
         nominal_voltage_unit = load.GetAttributeUnit(constants.NOM_VOLTAGE)
 
         formatted_loads[load.loc_name] = {
-            'num_customer': {"value": num_customer, "unit": num_customer_unit[0]},
             'nominal_active_power': {"value": nominal_active_power, "unit": nominal_active_power_unit[0]},
             'nominal_reactive_power': {"value": nominal_reactive_power, "unit": nominal_reactive_power_unit[0]},
             'nominal_voltage': {"value": nominal_voltage, "unit": nominal_voltage_unit[0]}

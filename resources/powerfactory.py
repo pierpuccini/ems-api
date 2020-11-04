@@ -112,6 +112,12 @@ class LoadFlow(Resource):
             parsed_response['loads'] = load_info(loads, tension_type, len(loads))
 
             print("All relevant calculations collected")
+
+        prj.Deactivate()
+        parsed_response['cost'] = price
+        print("Python Script ended.")
+
+        return Response(dumps(parsed_response), mimetype="application/json", status=200)  
         # elif elem_type == 'terminals':
 #         #     terminals = pf_app.GetCalcRelevantObjects("*.ElmTerm")
         #     if not terminals:
@@ -157,12 +163,6 @@ class LoadFlow(Resource):
         #     print("Collecting all calculation relevant to loads..")
         #     parsed_response['loads'] = load_info(loads, tension_type, len(loads))
         #     print("All relevant calculations to loads collected")
-
-        prj.Deactivate()
-        parsed_response['cost'] = price
-        print("Python Script ended.")
-
-        return Response(dumps(parsed_response), mimetype="application/json", status=200)
 
 
 class SetLoadFlow(Resource):
