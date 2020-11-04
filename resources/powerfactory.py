@@ -47,7 +47,7 @@ class LoadFlow(Resource):
         else:
             price = constants.BASE_TARIFF
 
-        print(time_project)
+        # print(time_project)
 
         prj = prj[int(time_project)]
         prj.Activate()
@@ -74,41 +74,41 @@ class LoadFlow(Resource):
             if not terminals:
                 # raise Exception("No calculation relevant terminals found")
                 return Response("No terminals found", mimetype="application/json", status=401)
-            print("Number of terminals found: %d" % len(terminals))
+            # print("Number of terminals found: %d" % len(terminals))
 
             lines = pf_app.GetCalcRelevantObjects("*.Elmlne")
             if not lines:
                 return Response("No lines found", mimetype="application/json", status=401)
-            print("Number of lines found: %d" % len(lines))
+            # print("Number of lines found: %d" % len(lines))
 
             transformers = pf_app.GetCalcRelevantObjects("*.ElmTr2")
             if not transformers:
                 return Response("No transformers found", mimetype="application/json", status=401)
-            print("Number of transformers found: %d" % len(transformers))
+            # print("Number of transformers found: %d" % len(transformers))
 
             generators = pf_app.GetCalcRelevantObjects("*.ElmSym")
             if not generators:
                 return Response("No lines found", mimetype="application/json", status=401)
-            print("Number of generators found: %d" % len(generators))
+            # print("Number of generators found: %d" % len(generators))
 
             loads = pf_app.GetCalcRelevantObjects("*.ElmLod")
             if not loads:
                 return Response("No lines found", mimetype="application/json", status=401)
-            print("Number of loads found: %d" % len(loads))
+            # print("Number of loads found: %d" % len(loads))
 
-            print("Collecting all calculation relevant to terminals..")
+            # print("Collecting all calculation relevant to terminals..")
             parsed_response['terminals'] = terminal_info(terminals, tension_type, len(terminals))
 
-            print("Collecting all calculation relevant to lines..")
+            # print("Collecting all calculation relevant to lines..")
             parsed_response['lines'] = line_info(lines, len(lines))
 
-            print("Collecting all calculation relevant to transformers..")
+            # print("Collecting all calculation relevant to transformers..")
             parsed_response['transformers'] = transformer_info(transformers, len(transformers))
 
-            print("Collecting all calculation relevant to generators..")
+            # print("Collecting all calculation relevant to generators..")
             parsed_response['generators'] = generator_info(generators, tension_type, len(generators))
 
-            print("Collecting all calculation relevant to loads..")
+            # print("Collecting all calculation relevant to loads..")
             parsed_response['loads'] = load_info(loads, tension_type, len(loads))
 
             print("All relevant calculations collected")
