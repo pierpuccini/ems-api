@@ -47,11 +47,11 @@ class LoadFlow(Resource):
         else:
             price = constants.BASE_TARIFF
 
-        # print(time_project)
+        print(time_project)
 
         prj = prj[int(time_project)]
         prj.Activate()
-        print('Activated project name: ' + prj.loc_name)
+        # print('Activated project name: ' + prj.loc_name)
 
         # get active project
         prj = pf_app.GetActiveProject()
