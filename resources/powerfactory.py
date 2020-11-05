@@ -41,11 +41,14 @@ class LoadFlow(Resource):
         time_as_list = current_time.split(":")
         time_project = int(time_as_list[0])
         if "23:00" <= current_time <= "23:59" or "00:00" <= current_time <= "05:59":
-            price = 2
+            price = constants.LOW_TARIFF
+            price_range = 2
         elif "16:00" <= current_time <= "22:59":
-            price = 1
+            price = constants.HIGH_TARIFF
+            price_range = 1
         else:
-            price = 0
+            price = constants.BASE_TARIFF
+            price_range = 0
 
         if project != 'auto':
             time_project = int(project)
@@ -118,6 +121,7 @@ class LoadFlow(Resource):
 
         prj.Deactivate()
         parsed_response['cost'] = price
+        parsed_response['costRange'] = price_range
         print("Python Script ended.")
 
         return Response(dumps(parsed_response), mimetype="application/json", status=200)
@@ -189,11 +193,14 @@ class SetLoadFlow(Resource):
         time_as_list = current_time.split(":")
         time_project = int(time_as_list[0])
         if "23:00" <= current_time <= "23:59" or "00:00" <= current_time <= "05:59":
-            price = 2
+            price = constants.LOW_TARIFF
+            price_range = 2
         elif "16:00" <= current_time <= "22:59":
-            price = 1
+            price = constants.HIGH_TARIFF
+            price_range = 1
         else:
-            price = 0
+            price = constants.BASE_TARIFF
+            price_range = 0
 
         # print(time_project)
 
@@ -268,6 +275,7 @@ class SetLoadFlow(Resource):
         # print("All relevant calculations collected")
 
         prj.Deactivate()
+        parsed_response['costRange'] = price_range
         parsed_response['cost'] = price
         print("Python Script ended.")
 
