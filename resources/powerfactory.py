@@ -48,7 +48,7 @@ class LoadFlow(Resource):
             price = 0
 
         if project != 'auto':
-            time_project = project
+            time_project = int(project)
 
         # print(time_project)
 
