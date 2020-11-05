@@ -189,11 +189,11 @@ class SetLoadFlow(Resource):
         time_as_list = current_time.split(":")
         time_project = int(time_as_list[0])
         if "23:00" <= current_time <= "23:59" or "00:00" <= current_time <= "05:59":
-            price = constants.LOW_TARIFF
+            price = 2
         elif "16:00" <= current_time <= "22:59":
-            price = constants.HIGH_TARIFF
+            price = 1
         else:
-            price = constants.BASE_TARIFF
+            price = 0
 
         # print(time_project)
 
