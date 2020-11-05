@@ -41,11 +41,14 @@ class LoadFlow(Resource):
         time_as_list = current_time.split(":")
         time_project = int(time_as_list[0])
         if "23:00" <= current_time <= "23:59" or "00:00" <= current_time <= "05:59":
-            price = constants.LOW_TARIFF
+            price = 2
         elif "16:00" <= current_time <= "22:59":
-            price = constants.HIGH_TARIFF
+            price = 1
         else:
-            price = constants.BASE_TARIFF
+            price = 0
+
+        if project != 'auto':
+            time_project = project
 
         # print(time_project)
 
@@ -117,7 +120,7 @@ class LoadFlow(Resource):
         parsed_response['cost'] = price
         print("Python Script ended.")
 
-        return Response(dumps(parsed_response), mimetype="application/json", status=200)  
+        return Response(dumps(parsed_response), mimetype="application/json", status=200)
         # elif elem_type == 'terminals':
 #         #     terminals = pf_app.GetCalcRelevantObjects("*.ElmTerm")
         #     if not terminals:
