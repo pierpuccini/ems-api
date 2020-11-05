@@ -54,7 +54,7 @@ class LoadFlow(Resource):
 
         prj = prj[time_project]
         prj.Activate()
-        print('Activated project')
+        # print('Activated project')
 
         # get active project
         prj = pf_app.GetActiveProject()
@@ -114,7 +114,7 @@ class LoadFlow(Resource):
             # print("Collecting all calculation relevant to loads..")
             parsed_response['loads'] = load_info(loads, tension_type, len(loads))
 
-            print("All relevant calculations collected")
+            # print("All relevant calculations collected")
 
         prj.Deactivate()
         parsed_response['cost'] = price
@@ -199,7 +199,7 @@ class SetLoadFlow(Resource):
 
         prj = prj[time_project]
         prj.Activate()
-        print('Activated project')
+        # print('Activated project')
 
         # get active project
         prj = pf_app.GetActiveProject()
@@ -265,7 +265,7 @@ class SetLoadFlow(Resource):
         # print("Collecting all calculation relevant to loads..")
         parsed_response['loads'] = load_info(loads, 57.5, len(loads))
 
-        print("All relevant calculations collected")
+        # print("All relevant calculations collected")
 
         prj.Deactivate()
         parsed_response['cost'] = price
