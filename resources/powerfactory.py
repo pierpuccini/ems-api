@@ -27,7 +27,7 @@ class LoadFlow(Resource):
         pf_app.PrintInfo("Python Script started..")
 
         user = pf_app.GetCurrentUser()
-        prj = user.GetContents('*.IntPrj')[0]
+        projects = user.GetContents('*.IntPrj')[0]
 
         # get active project
         # prj = pf_app.GetActiveProject()
@@ -55,7 +55,7 @@ class LoadFlow(Resource):
 
         # print(time_project)
 
-        prj = prj[time_project]
+        prj = projects[time_project]
         prj.Activate()
         # print('Activated project')
 
