@@ -121,12 +121,12 @@ class LoadFlow(Resource):
         parsed_response['costRange'] = price_range
         print("All relevant calculations collected")
 
+        prj.Deactivate()
+        print("Project deactivated")
+
+        print("Python Script ended.")
+
         return Response(dumps(parsed_response), mimetype="application/json", status=200)
-
-        #prj.Deactivate()
-        #print("Proyect deactivated")
-
-        #print("Python Script ended.")
 
         # elif elem_type == 'terminals':
 #         #     terminals = pf_app.GetCalcRelevantObjects("*.ElmTerm")
@@ -279,10 +279,10 @@ class SetLoadFlow(Resource):
         parsed_response['costRange'] = price_range
         print("All relevant calculations collected")
 
+        prj.Deactivate()
+        print("Project deactivated")
+
+        print("Python Script ended.")
+
         return Response(dumps(parsed_response), mimetype="application/json", status=200)
-
-        #prj.Deactivate()
-        #print("Proyect deactivated")
-
-        #print("Python Script ended.")
 
