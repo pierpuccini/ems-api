@@ -117,9 +117,10 @@ class LoadFlow(Resource):
             # print("Collecting all calculation relevant to loads..")
             parsed_response['loads'] = load_info(loads, tension_type, len(loads))
 
-            # print("All relevant calculations collected")
+        print("All relevant calculations collected")
 
         prj.Deactivate()
+        print("Proyect deactivated")
         parsed_response['cost'] = price
         parsed_response['costRange'] = price_range
         print("Python Script ended.")
